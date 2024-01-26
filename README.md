@@ -35,7 +35,7 @@ Xcode will fetch the latest version of `DayPlannerUI` and integrate it into your
                             
 ## Basic usage
 
-To utilize `DayPlannerView in your project, start by ensuring that your event or activity model conforms to the
+To utilize `DayPlannerView` in your project, start by ensuring that your event or activity model conforms to the
 `SchedulableElement` protocol. This protocol allows `DayPlannerView` to interact with your data.
 
 Here's an example of how to extend your model:
@@ -125,7 +125,7 @@ your `DayPlannerView`. The `ElementBuilder enables you to define precisely how e
 
 To define a custom appearance and behavior for your planner elements, follow these steps:
                                                     
-* Define Your Custom Element View:
+### Define Your Custom Element View:
                                     
 Create a SwiftUI view that represents how you want each element in the planner to appear.
 This view can be as simple or complex as your application requires, including text, images, shapes, animations, and more.
@@ -158,7 +158,7 @@ struct CustomElementView: View {
 }
 ```
 
-* Utilize Your Custom Element View in `DayPlannerView`:
+### Utilize Your Custom Element View in `DayPlannerView`:
 
 When initializing `DayPlannerView`, use the `ElementBuilder` closure to return an instance of your
 custom element view for each element. The closure provides the context for each element, including
