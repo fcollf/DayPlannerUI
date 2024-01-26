@@ -22,14 +22,14 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     /// based on the element's data and state.
     ///
     /// - Parameters:
-    ///   - element: The planner element, conforming to `SchedulableElement`, for which the view is being generated.
     ///   - startTime: The start time of the planner element. This can be used to position or configure the view.
-    ///   - placeholder: A Boolean value indicating whether the view to be rendered should be a placeholder view. This is typically 
+    ///   - element: The planner element, conforming to `SchedulableElement`, for which the view is being generated.
+    ///   - isPlaceholder: A Boolean value indicating whether the view to be rendered should be a placeholder view. This is typically
     ///   used to indicate that the primary view is being moved or dragged.
-    ///   - selected: A Boolean value indicating whether the planner element is currently selected, allowing for visual differentiation of the selected state.
+    ///   - isSelected: A Boolean value indicating whether the planner element is currently selected, allowing for visual differentiation of the selected state.
     /// - Returns: A view of type `V` that visually represents the planner element, or a placeholder view if the `placeholder` parameter is true.
     ///
-    public typealias ElementBuilder = (_ element: E, _ startTime: Date, _ placeholder: Bool, _ selected: Bool) -> V
+    public typealias ElementBuilder = (_ startTime: Date, _ element: E, _ isPlaceholder: Bool, _ isSelected: Bool) -> V
     
     
     /// A type alias for a closure that handles the change of an element.
@@ -123,10 +123,10 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
         self.visibleSegments = visibleSegments
         self._selection = selection
         self.onChange = onChange
-        self.elementBuilder = { element, startTime, placeholder, selected in
+        self.elementBuilder = { startTime, element, isPlaceholder, isSelected in
             AnyView(
                 DefaultPlannerElementView(
-                    element: element, startTime: startTime, isPlaceholder: placeholder, isSelected: selected)
+                    element: element, startTime: startTime, isPlaceholder: isPlaceholder, isSelected: isSelected)
             )
         }
     }

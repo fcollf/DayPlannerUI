@@ -27,12 +27,11 @@ extension DayPlannerView {
         
         // MARK: - Private Properties
         
+        /// The start time of the element
+        private var startTime: Date
         
         /// Represents the schedulable element to be displayed
         private var element: E
-        
-        /// The start time of the element
-        private var startTime: Date
         
         /// Indicates whether the element is a placeholder
         private var isPlaceholder: Bool
@@ -605,7 +604,7 @@ extension DayPlannerView {
             var body: some View {
                 
                 if let elementBuilder = viewModel.elementBuilder {
-                    elementBuilder(element.content, element.startTime, isPlaceholder, isSelected)
+                    elementBuilder(element.startTime, element.content, isPlaceholder, isSelected)
                 } else {
                     EmptyView()
                 }
