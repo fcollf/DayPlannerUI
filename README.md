@@ -84,8 +84,6 @@ struct ContentView: View {
         DayPlannerView(elements: events, selection: $selectedEvent)
     }
 }
-
-                            
 ```
 
 ## Customizing Appearance
@@ -116,8 +114,8 @@ This modifier changes the color of the placeholder view that appears when you're
 
 ## Customizing Element Views
 
-`DayPlannerView` empowers you with the flexibility to fully customize the presentation of each element,
-allowing you to control not just the colors, but the entire layout and interactivity of your events or
+`DayPlannerView` allows you to fully customize the presentation of each element,
+letting you to control not just the colors, but the entire layout and interactivity of your events or
 tasks. This customization is achieved through the `ElementBuilder` closure, which you provide when initializing
 your `DayPlannerView`. The `ElementBuilder enables you to define precisely how each element in the planner should be visualized.
 
@@ -125,10 +123,15 @@ your `DayPlannerView`. The `ElementBuilder enables you to define precisely how e
 
 To define a custom appearance and behavior for your planner elements, follow these steps:
                                                     
-### Define Your Custom Element View:
+### 1. Define Your Custom Element View
                                     
-Create a SwiftUI view that represents how you want each element in the planner to appear.
-This view can be as simple or complex as your application requires, including text, images, shapes, animations, and more.
+Create a SwiftUI view that represents how you want each element in the planner to appear. 
+Ensure your view expands to fill the available space by setting the frame to maximum width 
+and height. This view can include text, images, shapes, animations, and more to suit 
+your application's needs.
+
+For more dynamic and size-adaptive layouts, consider using `ViewThatFits` to provide different 
+view presentations based on the available space, especially useful when elements are resized.
 
 Here's a basic template for a custom element view:
                                     
@@ -144,21 +147,35 @@ struct CustomElementView: View {
     
     var body: some View {
         
-        // Define the visual structure of your element
-        VStack {
-            Text(element.title)
-            Text(element.subtitle)
-                .font(.footnote)
-            
-            // Add more views as needed
-        }
+        ViewThatFits {
         
+            // Layout for smaller size
+            VStack {
+                
+            }
+            
+            // Layout for larger size
+            VStack {
+                Text(element.title)
+                Text(element.subtitle)
+                    .font(.footnote)
+                
+                // Add more views as needed
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Makes the view fill the available space
+
         // Apply styling based on the `isSelected` state or any other logic
     }
 }
 ```
 
-### Utilize Your Custom Element View in `DayPlannerView`:
+In this custom view, `.frame(maxWidth: .infinity, maxHeight: .infinity)` ensures the view 
+expands to fill the available space, making it responsive to resizing gestures. `ViewThatFits` 
+is used to adapt the view's layout based on the available space, enhancing the visual 
+coherence during resizing.
+
+### 2. Utilize Your Custom Element View in `DayPlannerView`:
 
 When initializing `DayPlannerView`, use the `ElementBuilder` closure to return an instance of your
 custom element view for each element. The closure provides the context for each element, including

@@ -511,12 +511,15 @@ extension DayPlannerView {
                 if dragState == .dragging {
                     
                     PlannerElementContentView(element: element, isPlaceholder: true, isSelected: isSelected)
+                        .frame(height: elementSize.height + resizeAmount)
+                        .clipped()
                         .opacity(0.6)
                         .zIndex(1)
+                    
                 }
                 
                 ZStack {
-                        
+                    
                     if isSelected {
                         
                         GeometryReader { proxy in
@@ -542,6 +545,8 @@ extension DayPlannerView {
                     }
                     
                     PlannerElementContentView(element: element, isSelected: isSelected)
+                        .frame(height: elementSize.height + resizeAmount)
+                        .clipped()
                 }
                 .offset(y: translationAmount)
                 .simultaneousGesture(longPressGesture)
