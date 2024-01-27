@@ -14,6 +14,20 @@ Features:
 * Haptic Feedback: Feel subtle haptic responses during interactions for a refined user experience.
 * iOS Support: Seamlessly integrate into your iOS projects.
 
+## Screenshots
+
+Take a look at `DayPlannerView` in action:
+
+### Portrait View
+<p float="left">
+  <img src="Images/dayplannerui-01.png" width="400"/>
+  <img src="Images/dayplannerui-02.png" width="400"/>
+</p>
+
+
+### Landscape View
+<img src="Images/dayplannerui-03.png" height="400"/>
+
 ## Swift Package Manager
 
 To integrate DayPlannerUI into your project using Swift Package Manager, you can add it as a dependency in your `Package.swift` file:

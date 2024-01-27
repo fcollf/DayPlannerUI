@@ -77,43 +77,38 @@ extension DayPlannerView {
             
             VStack(alignment: .leading) {
                 
-                HStack {
+                HStack(alignment: .firstTextBaseline) {
                     
-                    HStack(alignment: .firstTextBaseline) {
+                    ViewThatFits {
                         
-                        ViewThatFits {
+                        VStack(alignment: .leading) {
                             
-                            VStack(alignment: .leading) {
-                                
-                                Text(element.title)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                
-                                Text(element.subtitle)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                    .foregroundStyle(.secondary)
-                            }
+                            Text(element.title)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
                             
-                            VStack(alignment: .leading) {
-                                
-                                Text(element.title)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                            }
+                            Text(element.subtitle)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .foregroundStyle(.secondary)
                         }
-                        .padding(.vertical, 5)
                         
-                        Spacer()
-                        
-                        Text(element.startTime.formatted(date: .omitted, time: .shortened))
+                        VStack(alignment: .leading) {
+                            
+                            Text(element.title)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                        }
                     }
+                    .padding(.vertical, 5)
                     
                     Spacer()
+                    
+                    Text(element.startTime.formatted(date: .omitted, time: .shortened))
                 }
                 .padding(.horizontal, 5)
                 .drawingGroup()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .background(.thinMaterial, in: Rectangle())
                 .padding(.leading, 4)
                 .padding(.trailing, 1)
