@@ -115,6 +115,8 @@ extension DayPlannerView {
                 .background(.thinMaterial, in: Rectangle())
                 .padding(.leading, 4)
                 .padding(.trailing, 1)
+                
+                Spacer()
             }
             .foregroundStyle(isSelected ? selectionColor : .secondary)
             .font(.footnote.weight(isSelected ? .medium : .regular))

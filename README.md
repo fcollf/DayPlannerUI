@@ -74,6 +74,9 @@ import SwiftUI
 
 struct ContentView: View {
     
+    // Reference date for the planner
+    var date: Date = .now
+    
     /// Your array of events
     @State var events: [MyEvent] = []
     
@@ -81,7 +84,7 @@ struct ContentView: View {
     @State var selectedEvent: MyEvent?
 
     var body: some View {
-        DayPlannerView(elements: events, selection: $selectedEvent)
+        DayPlannerView(date: date, elements: events, selection: $selectedEvent)
     }
 }
 ```
@@ -96,7 +99,7 @@ You can use the provided view modifiers to easily change the selected color and 
 To change the color of the selected element, use the `.foregroundStyle(selection:)` modifier on `DayPlannerView`:
 
 ```swift
-DayPlannerView(elements: events, selection: $selectedEvent)
+DayPlannerView(date: date, elements: events, selection: $selectedEvent)
     .foregroundStyle(selection: .blue)
 ```
 
@@ -106,7 +109,7 @@ When an event is being dragged, a placeholder view is shown. You can change the 
 to indicate that it's a temporary state:
 
 ```swift
-DayPlannerView(elements: events, selection: $selectedEvent)
+DayPlannerView(date: date, elements: events, selection: $selectedEvent)
     .foregroundStyle(placeholder: .indigo)
 ```
 
@@ -185,7 +188,7 @@ Here's how you use your custom element view with `DayPlannerView`:
                                 
 ```swift
 
-DayPlannerView(elements: events, selection: $selectedEvent) { startTime, element, isPlaceholder, isSelected in
+DayPlannerView(date: date, elements: events, selection: $selectedEvent) { startTime, element, isPlaceholder, isSelected in
     CustomElementView(startTime: startTime, element: element, isPlaceholder: isPlaceholder, isSelected: isSelected)
 }
 
@@ -209,7 +212,7 @@ When using a custom element view:
 
 ```swift
 
-DayPlannerView(elements: events, selection: $selectedEvent) { startTime, element, isPlaceholder, isSelected in
+DayPlannerView(date: date, elements: events, selection: $selectedEvent) { startTime, element, isPlaceholder, isSelected in
     CustomElementView(startTime: startTime, element: element, isPlaceholder: isPlaceholder, isSelected: isSelected)
 } onChange: { element in
     // Perform addtional actions
@@ -220,7 +223,7 @@ DayPlannerView(elements: events, selection: $selectedEvent) { startTime, element
 And when using the default visualization:
             
 ```swift
-    DayPlannerView(elements: events, selection: $selectedEvent) { element in
+    DayPlannerView(date: date, elements: events, selection: $selectedEvent) { element in
         // Perform addtional actions
     }
     .foregroundStyle(selection: .indigo)

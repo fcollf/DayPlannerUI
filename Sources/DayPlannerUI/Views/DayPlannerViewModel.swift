@@ -129,11 +129,12 @@ extension DayPlannerView {
         /// based on the view's geometry and prepares the time segments based on the specified scale.
         ///
         /// - Parameters:
+        ///   - date: The reference date to use in the planner.
         ///   - scale: The `PlannerTimeScale` enum value representing the granularity of the time segments.
         ///   - visibleSegments: The number of time segments visible at once in the planner view.
         ///   - size: A `CGSize` object providing the size information of the view.
         ///
-        init(scale: PlannerTimeScale, visibleSegments: Int, size: CGSize) {
+        init(date: Date, scale: PlannerTimeScale, visibleSegments: Int, size: CGSize) {
             
             let calendar = Calendar.current
             
@@ -155,7 +156,7 @@ extension DayPlannerView {
             
             // Initializes elements and segments
             
-            self.date = calendar.startOfDay(for: .now)
+            self.date = calendar.startOfDay(for: date)
             self.elements = .init()
             self.segments = []
             
@@ -164,6 +165,7 @@ extension DayPlannerView {
             }
 
             logger.debug("New ViewModel instance...")
+            logger.debug("Day: \(date.formatted(date: .abbreviated, time: .omitted))")
             logger.debug("Segment Height: \(self.segmentHeight)")
         }
         
@@ -177,12 +179,9 @@ extension DayPlannerView {
         /// that are not already present. It ensures all overlapping relationships are accurately maintained.
         ///
         /// - Parameters:
-        ///    - date: The reference date used for the planner.
         ///    - sequence: The new collection of elements to synchronize with.
         ///
-        func update<L: Sequence>(date: Date, elements sequence: L) where L.Element == E {
-            
-            self.date = date
+        func update<L: Sequence>(elements sequence: L) where L.Element == E {
             
             // Makes sure the elements are valid for the reference date
             let sequence = sequence.filter { calendar.isDate($0.startTime, inSameDayAs: date) }

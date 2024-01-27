@@ -85,7 +85,7 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     ///
     private func viewModel(size: CGSize) -> ViewModel {
         
-        let viewModel = ViewModel(scale: scale, visibleSegments: visibleSegments, size: size)
+        let viewModel = ViewModel(date: date, scale: scale, visibleSegments: visibleSegments, size: size)
         
         // Assigns the element content builder if any
         viewModel.elementBuilder = elementBuilder
@@ -98,7 +98,7 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
         viewModel.placeholderColor = placeholderColor
         
         // Updates the elements
-        viewModel.update(date: date, elements: elements)
+        viewModel.update(elements: elements)
         
         return viewModel
     }
@@ -185,7 +185,7 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
                 selection = viewModel?.selection?.content
             }
             .onChange(of: elements) {
-                viewModel?.update(date: date, elements: elements)
+                viewModel?.update(elements: elements)
             }
             .onChange(of: geometry.size) { 
                 viewModel = viewModel(size: geometry.size)
