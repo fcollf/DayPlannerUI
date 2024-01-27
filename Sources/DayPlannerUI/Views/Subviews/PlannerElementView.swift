@@ -77,37 +77,39 @@ extension DayPlannerView {
             
             VStack(alignment: .leading) {
                 
-                HStack(alignment: .firstTextBaseline) {
+                HStack {
                     
-                    ViewThatFits {
+                    HStack(alignment: .firstTextBaseline) {
                         
-                        VStack(alignment: .leading) {
+                        ViewThatFits {
                             
-                            Text(element.title)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
+                            VStack(alignment: .leading) {
+                                
+                                Text(element.title)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                
+                                Text(element.subtitle)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                    .foregroundStyle(.secondary)
+                            }
                             
-                            Text(element.subtitle)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                                .foregroundStyle(.secondary)
-                            
-                            Spacer()
+                            VStack(alignment: .leading) {
+                                
+                                Text(element.title)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                            }
                         }
+                        .padding(.vertical, 5)
                         
-                        VStack(alignment: .leading) {
-                            
-                            Text(element.title)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                        }
+                        Spacer()
+                        
+                        Text(element.startTime.formatted(date: .omitted, time: .shortened))
                     }
-                    .padding(.vertical, 5)
                     
                     Spacer()
-                    
-                    Text(element.startTime.formatted(date: .omitted, time: .shortened))
-                    
                 }
                 .padding(.horizontal, 5)
                 .drawingGroup()
@@ -115,8 +117,6 @@ extension DayPlannerView {
                 .background(.thinMaterial, in: Rectangle())
                 .padding(.leading, 4)
                 .padding(.trailing, 1)
-                
-                Spacer()
             }
             .foregroundStyle(isSelected ? selectionColor : .secondary)
             .font(.footnote.weight(isSelected ? .medium : .regular))
