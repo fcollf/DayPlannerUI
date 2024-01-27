@@ -20,13 +20,13 @@ Take a look at `DayPlannerView` in action:
 
 ### Portrait View
 <p float="left">
-  <img src="Images/dayplannerui-01.png" width="400"/>
-  <img src="Images/dayplannerui-02.png" width="400"/>
+  <img src="Images/dayplannerui-01.png" width="350"/>
+  <img src="Images/dayplannerui-02.png" width="350"/>
 </p>
 
 
 ### Landscape View
-<img src="Images/dayplannerui-03.png" height="400"/>
+<img src="Images/dayplannerui-03.png" height="350"/>
 
 ## Swift Package Manager
 
