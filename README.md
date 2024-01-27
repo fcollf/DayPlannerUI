@@ -1,22 +1,27 @@
 
 # DayPlannerUI
 
+[![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![GitHub stars](https://img.shields.io/github/stars/fcollf/DayPlannerUI.svg)](https://github.com/fcollf/DayPlannerUI/stargazers)
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Screenshots](#screenshots)
+   - [Features](#features)
+   - [Requirements](#requirements)
+3. [Screenshots](#screenshots)
    - [Portrait View](#portrait-view)
    - [Landscape View](#landscape-view)
-3. [Swift Package Manager](#swift-package-manager)
-4. [Basic Usage](#basic-usage)
-5. [Customizing Appearance](#customizing-appearance)
+4. [Swift Package Manager](#swift-package-manager)
+5. [Basic Usage](#basic-usage)
+6. [Customizing Appearance](#customizing-appearance)
    - [Changing the Selected Color](#changing-the-selected-color)
    - [Changing the Placeholder Color](#changing-the-placeholder-color)
-6. [Customizing Element Views](#customizing-element-views)
+7. [Customizing Element Views](#customizing-element-views)
    - [Creating a Custom View for Each Element](#creating-a-custom-view-for-each-element)
-7. [Performing Additional Actions](#performing-additional-actions)
+8. [Performing Additional Actions](#performing-additional-actions)
    - [Setting Up the Change Handler](#setting-up-the-change-handler)
-8. [License](#license)
+9. [License](#license)
 
 ## Introduction
 
@@ -25,13 +30,18 @@ It's designed to help users efficiently manage and organize their daily tasks an
 This package offers seamless interaction, enabling users to dynamically arrange their schedule by
 dragging and resizing elements within the planner.
 
-Features:
+### Features:
 
 * **Customizable Element Appearance**: Tailor the appearance of your planner elements to fit your app's style.
 * **Customizable Colors for Selected Elements**: Highlight active items distinctly with customizable color options.
 * **Interactive Drag and Resize**: Manage your daily tasks with intuitive drag-and-drop and resizing capabilities.
 * **Haptic Feedback**: Feel subtle haptic responses during interactions for a refined user experience.
-* iOS 17+ Support.
+
+### Requirements
+
+| Platform | Minimum Version |
+|----------|-----------------|
+| iOS      | 17.0            |
 
 ## Screenshots
 
