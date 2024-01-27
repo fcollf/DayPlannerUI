@@ -1,4 +1,23 @@
 
+# DayPlannerUI
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Screenshots](#screenshots)
+   - [Portrait View](#portrait-view)
+   - [Landscape View](#landscape-view)
+3. [Swift Package Manager](#swift-package-manager)
+4. [Basic Usage](#basic-usage)
+5. [Customizing Appearance](#customizing-appearance)
+   - [Changing the Selected Color](#changing-the-selected-color)
+   - [Changing the Placeholder Color](#changing-the-placeholder-color)
+6. [Customizing Element Views](#customizing-element-views)
+   - [Creating a Custom View for Each Element](#creating-a-custom-view-for-each-element)
+7. [Performing Additional Actions](#performing-additional-actions)
+   - [Setting Up the Change Handler](#setting-up-the-change-handler)
+8. [License](#license)
+
 ## Introduction
 
 The DayPlannerUI package introduces a user-friendly SwiftUI `DayPlannerView`, inspired by the native Apple Calendar's day view.
@@ -8,11 +27,11 @@ dragging and resizing elements within the planner.
 
 Features:
 
-* Customizable Element Appearance: Tailor the appearance of your planner elements to fit your app's style.
-* Customizable Colors for Selected Elements: Highlight active items distinctly with customizable color options.
-* Interactive Drag and Resize: Manage your daily tasks with intuitive drag-and-drop and resizing capabilities.
-* Haptic Feedback: Feel subtle haptic responses during interactions for a refined user experience.
-* iOS Support: Seamlessly integrate into your iOS projects.
+* **Customizable Element Appearance**: Tailor the appearance of your planner elements to fit your app's style.
+* **Customizable Colors for Selected Elements**: Highlight active items distinctly with customizable color options.
+* **Interactive Drag and Resize**: Manage your daily tasks with intuitive drag-and-drop and resizing capabilities.
+* **Haptic Feedback**: Feel subtle haptic responses during interactions for a refined user experience.
+* iOS 17+ Support.
 
 ## Screenshots
 
@@ -140,7 +159,7 @@ your `DayPlannerView`. The `ElementBuilder enables you to define precisely how e
 
 To define a custom appearance and behavior for your planner elements, follow these steps:
                                                     
-### 1. Define Your Custom Element View
+#### 1. Define Your Custom Element View
                                     
 Create a SwiftUI view that represents how you want each element in the planner to appear. 
 Ensure your view expands to fill the available space by setting the frame to maximum width 
@@ -192,7 +211,7 @@ expands to fill the available space, making it responsive to resizing gestures. 
 is used to adapt the view's layout based on the available space, enhancing the visual 
 coherence during resizing.
 
-### 2. Utilize Your Custom Element View in `DayPlannerView`:
+#### 2. Utilize Your Custom Element View in `DayPlannerView`:
 
 When initializing `DayPlannerView`, use the `ElementBuilder` closure to return an instance of your
 custom element view for each element. The closure provides the context for each element, including
@@ -214,7 +233,7 @@ DayPlannerView(date: date, elements: events, selection: $selectedEvent) { startT
 such as moving or resizing an element. This functionality is enabled through the `onChange` closure,
 which is invoked whenever an element is modified.
 
-## Setting Up the Change Handler
+### Setting Up the Change Handler
 
 To react to changes in your planner elements, define a `ChangeHandler` and pass it to your `DayPlannerView` during initialization.
 This handler receives the modified element as a parameter, allowing you to execute any additional logic, such as updating your data
