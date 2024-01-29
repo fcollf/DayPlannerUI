@@ -60,7 +60,7 @@ Take a look at `DayPlannerView` in action:
 
 ## Swift Package Manager
 
-To integrate DayPlannerUI into your project using Swift Package Manager, you can add it as a dependency in your `Package.swift` file:
+To integrate `DayPlannerUI` into your package, you can add it as a dependency in your `Package.swift` file:
 
 ```swift
 dependencies: [
@@ -68,7 +68,7 @@ dependencies: [
 ]
 ```
 
-Alternatively, if you're using Xcode:
+Alternatively, if you're working on an Xcode project:
 
 1. Open your project in Xcode.
 2. Go to File -> Add Package Dependencies....
