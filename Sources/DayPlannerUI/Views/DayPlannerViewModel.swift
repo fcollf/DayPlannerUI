@@ -58,6 +58,9 @@ extension DayPlannerView {
         /// The color to use when rendering the placeholder
         var placeholderColor: Color = .secondary.opacity(0.6)
 
+        /// Indicates if the planner elements are editable
+        var isEditable: Bool = true
+        
         /// A view builder for customizing the appearance of planner elements
         var elementBuilder: ElementBuilder? = nil
     

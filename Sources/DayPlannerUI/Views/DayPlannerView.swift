@@ -68,6 +68,9 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     /// The color to use when rendering the placeholder
     private var placeholderColor: Color = .secondary.opacity(0.6)
     
+    /// Indicates if the planner elements are editable
+    private var isEditable: Bool = true
+    
     /// A view builder for customizing the appearance of planner elements
     var elementBuilder: ElementBuilder? = nil
     
@@ -96,6 +99,9 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
         // Assigns the colors
         viewModel.selectionColor = selectionColor
         viewModel.placeholderColor = placeholderColor
+        
+        /// Assigns the `editable` flag
+        viewModel.isEditable = isEditable
         
         // Updates the elements
         viewModel.update(elements: elements)
@@ -224,6 +230,19 @@ extension DayPlannerView {
         
         var view = self
         view.placeholderColor = color
+        return view
+    }
+    
+    
+    /// Modifies whether the planner elements are editable (movable and resizable).
+    ///
+    /// - Parameter bool: A Boolean value that determines whether the planner elements are editable.
+    /// - Returns: An instance of the view with the modified editable state.
+    ///
+    public func isEditable(_ bool: Bool) -> Self {
+        
+        var view = self
+        view.isEditable = bool
         return view
     }
 }

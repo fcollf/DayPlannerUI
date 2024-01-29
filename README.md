@@ -159,6 +159,19 @@ DayPlannerView(date: date, elements: events, selection: $selectedEvent)
 
 This modifier changes the color of the placeholder view that appears when you're dragging an element.
 
+### Controlling Interactivity with `isEditable`
+
+`DayPlannerView` allows you to control whether the planner elements are editable (movable and resizable) 
+by using the `isEditable` modifier. This can be particularly useful if you want to switch between editable 
+and read-only modes based on certain conditions in your app.
+
+```swift
+DayPlannerView(date: date, elements: events, selection: $selectedEvent)
+    .isEditable(false)
+```
+
+To make your `DayPlannerView` read-only, simply apply the `isEditable` modifier with `false`:
+
 ## Customizing Element Views
 
 `DayPlannerView` allows you to fully customize the presentation of each element,

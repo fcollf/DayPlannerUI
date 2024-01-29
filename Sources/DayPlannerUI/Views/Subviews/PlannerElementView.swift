@@ -204,6 +204,11 @@ extension DayPlannerView {
             
             LongPressGesture(minimumDuration: 0.35)
                 .onEnded { _ in
+                    
+                    guard viewModel.isEditable else {
+                        return
+                    }
+                    
                     viewModel.onSelect(element: element)
                 }
         }
@@ -380,7 +385,11 @@ extension DayPlannerView {
         ///
         private func dragState(for value: DragGesture.Value) -> DragState {
             
-            if isSelected {
+            guard viewModel.isEditable else {
+                return .inactive
+            }
+            
+            return if isSelected {
                 
                 if resizeUpTargetArea.contains(value.startLocation) {
                     .resizingUp
@@ -546,8 +555,8 @@ extension DayPlannerView {
                         .clipped()
                 }
                 .offset(y: translationAmount)
-                .simultaneousGesture(longPressGesture)
-                .simultaneousGesture(dragGesture)
+                .simultaneousGesture(viewModel.isEditable ? longPressGesture : nil)
+                .simultaneousGesture(viewModel.isEditable ? dragGesture : nil)
                 .sensoryFeedback(.impact, trigger: isSelected)
                 .sensoryFeedback(.impact, trigger: dragState)
                 .zIndex(3)
