@@ -2,7 +2,7 @@
 # DayPlannerUI
 
 [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-[![Platforms](https://img.shields.io/badge/platforms-iOS-brightgreen)]
+![Platforms](https://img.shields.io/badge/platforms-iOS-brightgreen)
 [![GitHub stars](https://img.shields.io/github/stars/fcollf/DayPlannerUI.svg)](https://github.com/fcollf/DayPlannerUI/stargazers)
 
 ## Table of Contents
