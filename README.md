@@ -18,6 +18,7 @@
 6. [Customizing Appearance](#customizing-appearance)
    - [Changing the Selected Color](#changing-the-selected-color)
    - [Changing the Placeholder Color](#changing-the-placeholder-color)
+   - [Controlling Interactivity with `isEditable`](#controlling-interactivity-with-isEditable)
 7. [Customizing Element Views](#customizing-element-views)
    - [Creating a Custom View for Each Element](#creating-a-custom-view-for-each-element)
 8. [Performing Additional Actions](#performing-additional-actions)
