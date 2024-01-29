@@ -165,12 +165,12 @@ This modifier changes the color of the placeholder view that appears when you're
 by using the `isEditable` modifier. This can be particularly useful if you want to switch between editable 
 and read-only modes based on certain conditions in your app.
 
+To make your `DayPlannerView` read-only, simply apply the `isEditable` modifier with `false`:
+
 ```swift
 DayPlannerView(date: date, elements: events, selection: $selectedEvent)
     .isEditable(false)
 ```
-
-To make your `DayPlannerView` read-only, simply apply the `isEditable` modifier with `false`:
 
 ## Customizing Element Views
 
