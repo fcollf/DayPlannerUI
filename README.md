@@ -2,14 +2,13 @@
 # DayPlannerUI
 
 [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-![Platforms](https://img.shields.io/badge/platforms-iOS-brightgreen)
+![Platforms](https://img.shields.io/badge/iOS-17.0%2B-brightgreen)
 [![GitHub stars](https://img.shields.io/github/stars/fcollf/DayPlannerUI.svg)](https://github.com/fcollf/DayPlannerUI/stargazers)
 
 ## Table of Contents
 
 1. [Introduction](#introduction)
    - [Features](#features)
-   - [Requirements](#requirements)
 3. [Screenshots](#screenshots)
    - [Portrait View](#portrait-view)
    - [Landscape View](#landscape-view)
@@ -38,12 +37,6 @@ dragging and resizing elements within the planner.
 * **Customizable Colors for Selected Elements**: Highlight active items distinctly with customizable color options.
 * **Interactive Drag and Resize**: Manage your daily tasks with intuitive drag-and-drop and resizing capabilities.
 * **Haptic Feedback**: Feel subtle haptic responses during interactions for a refined user experience.
-
-### Requirements
-
-| Platform | Minimum Version |
-|----------|-----------------|
-| iOS      | 17.0            |
 
 ## Screenshots
 
