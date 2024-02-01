@@ -47,9 +47,6 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     /// The view model to manage the state and interactions
     @State private var viewModel: ViewModel?
     
-    /// The reference date for the elements
-    private var date: Date
-    
     /// The collection of element to be displayed in the schedule
     private var elements: [E]
     
@@ -88,7 +85,7 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     ///
     private func viewModel(size: CGSize) -> ViewModel {
         
-        let viewModel = ViewModel(date: date, scale: scale, visibleSegments: visibleSegments, size: size)
+        let viewModel = ViewModel(scale: scale, visibleSegments: visibleSegments, size: size)
         
         // Assigns the element content builder if any
         viewModel.elementBuilder = elementBuilder
@@ -118,16 +115,14 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     /// This initializer sets up the view with a default appearance for each schedulable item.
     ///
     /// - Parameters:
-    ///   - date: Reference date for the planner view.
     ///   - elements: A collection of elements conforming to `SchedulableElement`.
     ///   - scale: The scale of the time segments, which determines how the planner is visually divided.
     ///   - visibleSegments: The number of segments to display simultaneously.
     ///   - selection: A binding to the selected element.
     ///   - onChange: An optional closure that is called when an item is changed.
     ///
-    public init(date: Date, elements: S, scale: PlannerTimeScale = .half, visibleSegments: Int = 24, selection: Binding<E?>, onChange: ChangeHandler? = nil) where V == AnyView {
+    public init(elements: S, scale: PlannerTimeScale = .half, visibleSegments: Int = 24, selection: Binding<E?>, onChange: ChangeHandler? = nil) where V == AnyView {
         
-        self.date = date
         self.elements = Array(elements)
         
         self.scale = scale
@@ -146,7 +141,6 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     /// Initializes the `DayScheduleView` with a set of schedulable items and a specified granularity.
     ///
     /// - Parameters:
-    ///   - date: Reference date for the planner view.
     ///   - elements: A collection of elements conforming to `SchedulableElement`.
     ///   - scale: The scale of the time segments, which determines how the planner  is visually divided.
     ///   - visibleSegments: The number of segments to display simultaneously.
@@ -154,9 +148,8 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     ///   - elementBuilder: A view builder closure to customize the appearance of each planner element.
     ///   - onChange: An optional closure that is called when an item is changed.
     ///
-    public init(date: Date, elements: S, scale: PlannerTimeScale = .half, visibleSegments: Int = 24, selection: Binding<E?>, @ViewBuilder elementBuilder: @escaping ElementBuilder, onChange: ChangeHandler? = nil) {
+    public init(elements: S, scale: PlannerTimeScale = .half, visibleSegments: Int = 24, selection: Binding<E?>, @ViewBuilder elementBuilder: @escaping ElementBuilder, onChange: ChangeHandler? = nil) {
         
-        self.date = date
         self.elements = Array(elements)
         
         self.scale = scale

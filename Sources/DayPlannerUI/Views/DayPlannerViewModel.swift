@@ -40,9 +40,6 @@ extension DayPlannerView {
         /// The height of each individual time segment in the view
         private (set) var segmentHeight: CGFloat
         
-        /// Reference date for the planner view.
-        private (set) var date: Date
-        
         /// The list of schedulable elements in the planner
         private (set) var elements: [PlannerElement<E>]
         
@@ -132,12 +129,11 @@ extension DayPlannerView {
         /// based on the view's geometry and prepares the time segments based on the specified scale.
         ///
         /// - Parameters:
-        ///   - date: The reference date to use in the planner.
         ///   - scale: The `PlannerTimeScale` enum value representing the granularity of the time segments.
         ///   - visibleSegments: The number of time segments visible at once in the planner view.
         ///   - size: A `CGSize` object providing the size information of the view.
         ///
-        init(date: Date, scale: PlannerTimeScale, visibleSegments: Int, size: CGSize) {
+        init(scale: PlannerTimeScale, visibleSegments: Int, size: CGSize) {
             
             let calendar = Calendar.current
             
@@ -159,7 +155,6 @@ extension DayPlannerView {
             
             // Initializes elements and segments
             
-            self.date = calendar.startOfDay(for: date)
             self.elements = .init()
             self.segments = []
             
@@ -168,7 +163,6 @@ extension DayPlannerView {
             }
 
             logger.debug("New ViewModel instance...")
-            logger.debug("Day: \(date.formatted(date: .abbreviated, time: .omitted))")
             logger.debug("Segment Height: \(self.segmentHeight)")
         }
         
@@ -185,9 +179,6 @@ extension DayPlannerView {
         ///    - sequence: The new collection of elements to synchronize with.
         ///
         func update<L: Sequence>(elements sequence: L) where L.Element == E {
-            
-            // Makes sure the elements are valid for the reference date
-            let sequence = sequence.filter { calendar.isDate($0.startTime, inSameDayAs: date) }
             
             // Removes elements not present in the collection
             
@@ -240,7 +231,7 @@ extension DayPlannerView {
             let hours = index / factor
             let minutes = (index % factor) * scale.minutes
             
-            let startOfDay = calendar.startOfDay(for: date)
+            let startOfDay = calendar.startOfDay(for: .now)
             
             return calendar.date(bySettingHour: hours, minute: minutes, second: 0, of: startOfDay) ?? startOfDay
         }
@@ -256,7 +247,7 @@ extension DayPlannerView {
         ///
         func startTime(for yOffset: CGFloat) -> Date? {
             
-            let startOfDay = calendar.startOfDay(for: date)
+            let startOfDay = calendar.startOfDay(for: .now)
             
             let factor = CGFloat(scale.segments / visibleSegments)
             let segmentIndex = yOffset / segmentHeight

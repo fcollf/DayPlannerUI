@@ -365,12 +365,36 @@ final class PlannerElement<E: SchedulableElement>: Identifiable {
     ///
     func update(startTime: Date, endTime: Date? = nil) {
         
-        self.startTime = startTime
+        // Extract date components from the existing start time
+        var dateComponents = calendar.dateComponents([.year, .month, .day], from: self.startTime)
+        
+        // Extract the new time components
+        let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: startTime)
+        
+        // Updates the start time
+        
+        dateComponents.hour = timeComponents.hour
+        dateComponents.minute = timeComponents.minute
+        dateComponents.second = timeComponents.second
+        
+        self.startTime = calendar.date(from: dateComponents) ?? self.startTime
+        
+        // Updates the end time using the new end time or calculating a new
+        // one based on the new start time and duration
         
         if let endTime = endTime {
-            self.endTime = endTime
+            
+            let endTimeComponents = calendar.dateComponents([.hour, .minute, .second], from: endTime)
+            
+            dateComponents.hour = endTimeComponents.hour
+            dateComponents.minute = endTimeComponents.minute
+            dateComponents.second = endTimeComponents.second
+            
+            self.endTime = calendar.date(from: dateComponents) ?? self.endTime
+            
         } else {
-            self.endTime = calendar.date(byAdding: .minute, value: self.duration, to: startTime) ?? self.endTime
+
+            self.endTime = calendar.date(byAdding: .minute, value: self.duration, to: self.startTime) ?? self.endTime
         }
         
         self.interval = .init(startTime: self.startTime, endTime: self.endTime)
