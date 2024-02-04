@@ -12,7 +12,7 @@
 3. [Screenshots](#screenshots)
    - [Portrait View](#portrait-view)
    - [Landscape View](#landscape-view)
-4. [Swift Package Manager](#swift-package-manager)
+4. [Installing](#installing)
 5. [Basic Usage](#basic-usage)
 6. [Customizing Appearance](#customizing-appearance)
    - [Changing the Selected Color](#changing-the-selected-color)
@@ -22,6 +22,7 @@
    - [Creating a Custom View for Each Element](#creating-a-custom-view-for-each-element)
 8. [Performing Additional Actions](#performing-additional-actions)
    - [Setting Up the Change Handler](#setting-up-the-change-handler)
+   - [Adding a Tap Gesture](#adding-a-tap-gesture)
 9. [License](#license)
 
 ## Introduction
@@ -52,7 +53,7 @@ Take a look at `DayPlannerView` in action:
 ### Landscape View
 <img src="Images/dayplannerui-03.png" height="350"/>
 
-## Swift Package Manager
+## Installing
 
 To integrate `DayPlannerUI` into your package, you can add it as a dependency in your `Package.swift` file:
 
@@ -66,10 +67,15 @@ Alternatively, if you're working on an Xcode project:
 
 1. Open your project in Xcode.
 2. Go to File -> Add Package Dependencies....
-3. Paste the repository URL: https://github.com/fcollf/DayPlannerUI.git.
+3. Paste the repository URL: <https://github.com/fcollf/DayPlannerUI>
 4. Choose the version you want to use (e.g., Up to Next Major).
 
 Xcode will fetch the latest version of `DayPlannerUI` and integrate it into your project.
+Once that is complete, you can start using `DayPlannerUI` by importing it into your Swift code:
+
+```swift
+import DayPlannerUI
+```
                             
 ## Basic usage
 
@@ -279,6 +285,30 @@ And when using the default visualization:
 
 In both cases, the `onChange` closure provides a way to react to user interactions, ensuring
 that your application can dynamically respond to changes in the day planner.
+
+### Adding a Tap Gesture
+
+`DayPlannerView` also supports tap gestures on elements, enabling you to define custom actions when 
+an element is tapped. This is achieved through the `onTapGesture` modifier, which assigns a closure 
+to be called whenever an element receives a tap gesture.
+
+```swift
+   DayPlannerView(elements: events, selection: $selectedEvent) { element in
+      // Perform addtional actions
+   }
+   .isEditable(false)
+   .onTapGesture { element in
+      print("Tapped element: \(element.title)")
+   }
+```
+
+In this example, the `onTapGesture` closure prints the tapped element's details to the console, 
+but you can replace this with any custom behavior you need for your application.
+
+> [!Note]
+> The tap gesture is only recognized when the `DayPlannerView` is in non-editable mode. If the view is
+> set to editable mode (allowing users to select, drag or resize elements), the tap gesture won't be active.
+> To use the tap gesture, ensure that the view is in non-editable mode by setting the `isEditable` property to `false`.
 
 ## License
 
