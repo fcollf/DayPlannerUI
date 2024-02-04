@@ -27,6 +27,7 @@ extension DayPlannerView {
         
         // MARK: - Private Properties
         
+        
         /// The start time of the element
         private var startTime: Date
         
@@ -211,6 +212,14 @@ extension DayPlannerView {
                     
                     viewModel.onSelect(element: element)
                 }
+        }
+        
+        /// A tap gesture recognizer for the planner element
+        private var tapGesture: some Gesture {
+            
+            TapGesture().onEnded { _ in
+                viewModel.onTap(element: element)
+            }
         }
         
         /// Drag gesture to move the selected segment
@@ -557,6 +566,7 @@ extension DayPlannerView {
                 .offset(y: translationAmount)
                 .simultaneousGesture(viewModel.isEditable ? longPressGesture : nil)
                 .simultaneousGesture(viewModel.isEditable ? dragGesture : nil)
+                .simultaneousGesture(viewModel.isEditable ? nil : tapGesture)
                 .sensoryFeedback(.impact, trigger: isSelected)
                 .sensoryFeedback(.impact, trigger: dragState)
                 .zIndex(3)

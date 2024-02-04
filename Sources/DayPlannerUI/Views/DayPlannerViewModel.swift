@@ -64,6 +64,9 @@ extension DayPlannerView {
         /// An optional closure that is called when an element in the planner is changed
         var onChange: ChangeHandler? = nil
         
+        /// An optional closure that is called when an element in the planner is tapped
+        var onTap: TapHandler? = nil
+        
         /// The minimum vertical offset for the planner view
         var minOffset: CGFloat = 0.0
         
@@ -163,6 +166,7 @@ extension DayPlannerView {
             }
 
             logger.debug("New ViewModel instance...")
+            logger.debug("Height: \(self.height)")
             logger.debug("Segment Height: \(self.segmentHeight)")
         }
         
@@ -372,6 +376,18 @@ extension DayPlannerView {
         ///
         func onSelect(element: PlannerElement<E>?) {
             selection = selection == element ? nil : element
+        }
+        
+        
+        /// Notifies when an element is tapped.
+        ///
+        /// This function is called to handle tap gestures on planner elements.
+        /// It triggers the `onTap` closure if it's provided, passing the content of the tapped element.
+        ///
+        /// - Parameter element: The `PlannerElement` that was tapped.
+        /// 
+        func onTap(element: PlannerElement<E>) {
+            self.onTap?(element.content)
         }
         
         

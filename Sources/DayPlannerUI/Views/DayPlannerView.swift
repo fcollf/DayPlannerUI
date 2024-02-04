@@ -41,6 +41,15 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     public typealias ChangeHandler = (E) -> ()
     
     
+    /// A type alias for a closure that handles the tap of an element.
+    ///
+    /// This closure is called when an element is tapped.
+    /// - Parameters:
+    ///    - item: The selected item of type `E`, conforming to `SchedulableElement`.
+    ///
+    public typealias TapHandler = (E) -> ()
+    
+    
     // MARK: - Private Properties
     
     
@@ -69,10 +78,13 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     private var isEditable: Bool = true
     
     /// A view builder for customizing the appearance of planner elements
-    var elementBuilder: ElementBuilder? = nil
+    var elementBuilder: ElementBuilder?
     
     /// An optional closure that is called when an element in the planner is changed
     private var onChange: ChangeHandler?
+    
+    /// An optional closure that is called when an element in the planner is tapped
+    private var onTap: TapHandler?
     
     
     // MARK: - Private Functions
@@ -90,8 +102,9 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
         // Assigns the element content builder if any
         viewModel.elementBuilder = elementBuilder
         
-        // Assigns the change handler
+        // Assigns the handlers
         viewModel.onChange = onChange
+        viewModel.onTap = onTap
         
         // Assigns the colors
         viewModel.selectionColor = selectionColor
@@ -177,7 +190,7 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
                 }
             }
             .scrollIndicators(.hidden)
-            .onAppear {
+            .onChange(of: geometry.size) {
                 viewModel = viewModel(size: geometry.size)
             }
             .onChange(of: viewModel?.selection) {
@@ -185,9 +198,6 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
             }
             .onChange(of: elements) {
                 viewModel?.update(elements: elements)
-            }
-            .onChange(of: geometry.size) { 
-                viewModel = viewModel(size: geometry.size)
             }
         }
     }
@@ -236,6 +246,19 @@ extension DayPlannerView {
         
         var view = self
         view.isEditable = bool
+        return view
+    }
+    
+    
+    /// Modifies the view to execute the given closure when an element is tapped.
+    ///
+    /// - Parameter handler: The closure to execute when an element is tapped.
+    /// - Returns: An instance of the view with the modified tap handler.
+    /// 
+    public func onTapGesture( _ handler: @escaping TapHandler) -> Self {
+        
+        var view = self
+        view.onTap = handler
         return view
     }
 }
