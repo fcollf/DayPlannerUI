@@ -173,6 +173,58 @@ public struct DayPlannerView<E: SchedulableElement, S: Sequence, V: View>: View 
     }
     
     
+    /// Initializes the `DayScheduleView` with a set of schedulable items, specified granularity, and a custom element builder.
+    ///
+    /// This initializer is used when you want a read-only view without interactive features such as element selection or resizing.
+    /// It allows for a custom visualization of each element without requiring a selection binding or a change handler.
+    ///
+    /// - Parameters:
+    ///   - elements: A collection of elements conforming to `SchedulableElement`.
+    ///   - scale: The scale of the time segments, which determines how the planner  is visually divided.
+    ///   - visibleSegments: The number of segments to display simultaneously.
+    ///   - elementBuilder: A view builder closure to customize the appearance of each planner element.
+    ///
+    public init(elements: S, scale: PlannerTimeScale = .half, visibleSegments: Int = 24, @ViewBuilder elementBuilder: @escaping ElementBuilder) {
+        
+        self.elements = Array(elements)
+        
+        self.scale = scale
+        self.visibleSegments = visibleSegments
+        self._selection = .constant(nil)
+        self.elementBuilder = elementBuilder
+        self.isEditable = false
+    }
+    
+    
+    /// Initializes the `DayScheduleView` with a set of schedulable items, specified granularity, and a default view for each item.
+    ///
+    /// This initializer is suitable when you want a read-only view with a default visualization for each element.
+    /// It sets up the view without interactive features, omitting the need for selection binding or change handling.
+    ///
+    ///
+    /// - Parameters:
+    ///   - elements: A collection of elements conforming to `SchedulableElement`.
+    ///   - scale: The scale of the time segments, which determines how the planner  is visually divided.
+    ///   - visibleSegments: The number of segments to display simultaneously.
+    ///
+    public init(elements: S, scale: PlannerTimeScale = .half, visibleSegments: Int = 24) where V == AnyView {
+        
+        self.elements = Array(elements)
+        
+        self.scale = scale
+        self.visibleSegments = visibleSegments
+        self._selection = .constant(nil)
+        self.isEditable = false
+
+        self.elementBuilder = { startTime, element, isPlaceholder, isSelected in
+            AnyView(
+                DefaultPlannerElementView(
+                    element: element, startTime: startTime, isPlaceholder: isPlaceholder, isSelected: isSelected)
+            )
+        }
+    }
+    
+    
     // MARK: - Body
     
     
