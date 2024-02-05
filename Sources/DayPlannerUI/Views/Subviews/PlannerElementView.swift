@@ -566,7 +566,7 @@ extension DayPlannerView {
                 .offset(y: translationAmount)
                 .simultaneousGesture(viewModel.isEditable ? longPressGesture : nil)
                 .simultaneousGesture(viewModel.isEditable ? dragGesture : nil)
-                .simultaneousGesture(viewModel.isEditable ? nil : tapGesture)
+                .simultaneousGesture(tapGesture)//viewModel.isEditable ? nil : tapGesture)
                 .sensoryFeedback(.impact, trigger: isSelected)
                 .sensoryFeedback(.impact, trigger: dragState)
                 .zIndex(3)

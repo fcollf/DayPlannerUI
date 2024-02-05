@@ -304,13 +304,6 @@ DayPlannerView(elements: events)
 In this example, the `onTapGesture` closure prints the tapped element's details to the console, 
 but you can replace this with any custom behavior you need for your application.
 
-> [!IMPORTANT]
-> The tap gesture is only active in non-editable mode. If `DayPlannerView` is set to editable 
-> mode (allowing element selection, dragging, or resizing), the tap gesture won't be recognized. 
-> To utilize the tap gesture effectively, ensure that the view is in a non-editable state. This can 
-> be achieved by either setting the `isEditable` property to false or by using the shorter 
-> initializer for a display-only view
-
 ## License
 
 This package is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
