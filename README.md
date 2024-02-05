@@ -85,7 +85,6 @@ To utilize `DayPlannerView` in your project, start by ensuring that your event o
 Here's an example of how to extend your model:
                                 
 ```swift
-                            
 import DayPlannerUI
 
 struct MyEvent: SchedulableElement {
@@ -104,14 +103,12 @@ struct MyEvent: SchedulableElement {
 
     ...
 }
-                            
 ```
 
 After your model conforms to `SchedulableElement`, you can initialize and use `DayPlannerView` in your SwiftUI views.
 Here's a basic example using the default event visualization and colors:
                                 
 ```swift
-                            
 import DayPlannerUI
 import SwiftUI
 
@@ -168,6 +165,15 @@ To make your `DayPlannerView` read-only, simply apply the `isEditable` modifier 
 DayPlannerView(elements: events, selection: $selectedEvent)
     .isEditable(false)
 ```
+
+> [!TIP]
+> Utilize the shorter initializer if you don't need selection or change handling, 
+> which implicitly sets the view to non-editable:
+>
+> ```swift
+> DayPlannerView(elements: events)
+> ```
+
 
 ## Customizing Element Views
 
@@ -241,11 +247,9 @@ its data and state, allowing your custom view to react and display accordingly.
 Here's how you use your custom element view with `DayPlannerView`:
                                 
 ```swift
-
 DayPlannerView(elements: events, selection: $selectedEvent) { startTime, element, isPlaceholder, isSelected in
     CustomElementView(startTime: startTime, element: element, isPlaceholder: isPlaceholder, isSelected: isSelected)
 }
-
 ```
                 
 ## Performing Additional Actions
@@ -265,22 +269,20 @@ Here's how you can set up and use the `onChange` closure:
 When using a custom element view:
 
 ```swift
-
 DayPlannerView(elements: events, selection: $selectedEvent) { startTime, element, isPlaceholder, isSelected in
     CustomElementView(startTime: startTime, element: element, isPlaceholder: isPlaceholder, isSelected: isSelected)
 } onChange: { element in
     // Perform addtional actions
 }
-
 ```
 
 And when using the default visualization:
             
 ```swift
-    DayPlannerView(elements: events, selection: $selectedEvent) { element in
-        // Perform addtional actions
-    }
-    .foregroundStyle(selection: .indigo)
+DayPlannerView(elements: events, selection: $selectedEvent) { element in
+    // Perform addtional actions
+}
+.foregroundStyle(selection: .indigo)
 ```
 
 In both cases, the `onChange` closure provides a way to react to user interactions, ensuring
@@ -293,10 +295,7 @@ an element is tapped. This is achieved through the `onTapGesture` modifier, whic
 to be called whenever an element receives a tap gesture.
 
 ```swift
-   DayPlannerView(elements: events, selection: $selectedEvent) { element in
-      // Perform addtional actions
-   }
-   .isEditable(false)
+DayPlannerView(elements: events)
    .onTapGesture { element in
       print("Tapped element: \(element.title)")
    }
@@ -305,10 +304,12 @@ to be called whenever an element receives a tap gesture.
 In this example, the `onTapGesture` closure prints the tapped element's details to the console, 
 but you can replace this with any custom behavior you need for your application.
 
-> [!Note]
-> The tap gesture is only recognized when the `DayPlannerView` is in non-editable mode. If the view is
-> set to editable mode (allowing users to select, drag or resize elements), the tap gesture won't be active.
-> To use the tap gesture, ensure that the view is in non-editable mode by setting the `isEditable` property to `false`.
+> [!IMPORTANT]
+> The tap gesture is only active in non-editable mode. If `DayPlannerView` is set to editable 
+> mode (allowing element selection, dragging, or resizing), the tap gesture won't be recognized. 
+> To utilize the tap gesture effectively, ensure that the view is in a non-editable state. This can 
+> be achieved by either setting the `isEditable` property to false or by using the shorter 
+> initializer for a display-only view
 
 ## License
 
